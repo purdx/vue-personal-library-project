@@ -1,9 +1,14 @@
 <template>
-  <div />
+  <TheLogin />
 </template>
 
 <script>
-export default {}
+import TheLogin from '@/components/TheLogin.vue'
+export default {
+  components: {
+    TheLogin
+  }
+}
 </script>
 
 <style scoped>
