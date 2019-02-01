@@ -20,7 +20,7 @@
                   :class="{'border-danger': error}"
                   aria-describedby="clientIdHelp"
                   placeholder="Enter client ID"
-                  @keyup="error = false"
+                  @focus="error = false"
                 >
                 <small v-show="error" class="form-text text-danger">
                   Sorry, you should enter the client ID.
