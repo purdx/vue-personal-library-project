@@ -17,11 +17,13 @@
                   v-model="clientID"
                   type="text"
                   class="form-control"
+                  :class="{'border-danger': error}"
                   aria-describedby="clientIdHelp"
                   placeholder="Enter client ID"
+                  @keyup="error = false"
                 >
-                <small id="clientIdhelp" class="form-text">
-                  We'll never share your email with anyone else.
+                <small v-show="error" class="form-text text-danger">
+                  Sorry, you should enter the client ID.
                 </small>
               </div>
               <button type="submit" class="btn btn-primary" @click="login">
@@ -39,14 +41,19 @@
 export default {
   data() {
     return {
-      clientID: ''
+      clientID: '',
+      error: false
     }
   },
   methods: {
     login() {
-      location = `http://hiring.bsup.tk/oauth/authorize?client_id=${
-        this.clientID
-      }&redirect_uri=http://localhost&response_type=token&scope=`
+      if (this.clientID === '') {
+        this.error = true
+      } else {
+        location = `http://hiring.bsup.tk/oauth/authorize?client_id=${
+          this.clientID
+        }&redirect_uri=http://localhost:3000&response_type=token&scope=`
+      }
     }
   }
 }
@@ -55,5 +62,11 @@ export default {
 <style scoped lang='scss'>
 .login {
   min-height: 100vh;
+}
+.form-text {
+  position: absolute;
+}
+.form-group {
+  margin-bottom: 2.4rem;
 }
 </style>
