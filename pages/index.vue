@@ -17,6 +17,22 @@ export default {
       const accessToken = url.match(/#(?:access_token)=([\S\s]*?)&/)[1]
       localStorage.setItem('accessToken', accessToken)
       this.$store.commit('SET_TOKEN', accessToken)
+      this.$axios({
+        method: 'get',
+        url: 'http://localhost:3000/api/user',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${this.$store.state.accessToken}`
+        }
+      })
+        .then(response => {
+          this.$store.commit('SET_USERNAME', response.data.data.name)
+          alert(response.data.name)
+          this.$store.commit('SET_EMAIL', response.data.data.email)
+        })
+        .catch(response => {
+          alert(response)
+        })
     }
   }
 }

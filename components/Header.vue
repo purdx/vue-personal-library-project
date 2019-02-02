@@ -20,7 +20,7 @@
             :aria-expanded="showDropdown"
             @click="showDropdown = !showDropdown"
           >
-            Profile
+            {{ $store.state.userName }}
           </a>
           <div class="dropdown-menu" :class="{ 'show': showDropdown}" aria-labelledby="navbarDropdown">
             <nuxt-link class="dropdown-item" to="/profile">
