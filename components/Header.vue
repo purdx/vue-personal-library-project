@@ -33,7 +33,6 @@
           </div>
         </li>
       </ul>
-      </nuxt-link>
     </nav>
   </header>
 </template>
@@ -49,7 +48,7 @@ export default {
   methods: {
     logout() {
       this.$store.commit('REMOVE_USER')
-      localStorage.clear(
+      localStorage.clear()
       this.$router.push('/login')
     }
   }
