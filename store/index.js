@@ -1,7 +1,7 @@
 export const state = () => ({
-  accessToken: null,
-  userName: null,
-  email: null
+  accessToken: localStorage.getItem('accessToken'),
+  userName: localStorage.getItem('userName'),
+  email: localStorage.getItem('email')
 })
 
 export const getters = {

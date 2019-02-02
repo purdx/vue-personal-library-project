@@ -49,7 +49,7 @@ export default {
   methods: {
     logout() {
       this.$store.commit('REMOVE_USER')
-      localStorage.removeItem('accessToken')
+      localStorage.clear()
       this.$router.push('/login')
     }
   }

@@ -20,7 +20,9 @@ export default {
       this.$axios('http://localhost:3000/api/user')
         .then(response => {
           this.$store.commit('SET_USERNAME', response.data.data.name)
+          localStorage.setItem('userName', response.data.data.name)
           this.$store.commit('SET_EMAIL', response.data.data.email)
+          localStorage.setItem('email', response.data.data.email)
         })
         .catch(response => {
           alert(response)
