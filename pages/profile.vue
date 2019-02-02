@@ -1,22 +1,31 @@
 <template>
   <div>
     <Header />
-    <div class="container">
-      <div class="row">
-        <div class="card col-md-8">
-          <h3 class="card-header">
-            Your profile
-          </h3>
-          <div class="card-block">
-            <h4 class="card-title">
-              Special title treatment
-            </h4>
-            <p class="card-text">
-              With supporting text below as a natural lead-in to additional content.
-            </p>
-            <a href="#" class="btn btn-primary">
-              Go somewhere
-            </a>
+    <div class="container page-content">
+      <div class="row justify-content-md-center">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">
+              Your profile
+            </div>
+            <div class="card-body">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  Name: {{ $store.state.userName }}
+                </li>
+                <li class="list-group-item">
+                  Email: {{ $store.state.email }}
+                </li>
+              </ul>
+              <div class="profile-buttons">
+                <button type="button" class="btn btn-outline-secondary">
+                  Edit Info
+                </button>
+                <button type="button" class="btn btn-outline-secondary">
+                  Change Password
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -25,10 +34,17 @@
 </template>
 
 <script>
+import Header from '@/components/Header'
 export default {
-  name: 'TheProfile'
+  name: 'TheProfile',
+  components: {
+    Header
+  }
 }
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
+.profile-buttons {
+  margin-top: 40px;
+}
 </style>
