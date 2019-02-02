@@ -27,7 +27,7 @@
               View profile
             </nuxt-link>
             <div class="dropdown-divider" />
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="#" @click="logout">
               Logout
             </a>
           </div>
@@ -43,6 +43,11 @@ export default {
   data() {
     return {
       showDropdown: false
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.commit('REMOVE_TOKEN')
     }
   }
 }

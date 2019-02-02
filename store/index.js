@@ -1,5 +1,5 @@
 export const state = () => ({
-  accessToken: localStorage.getItem('accessToken'),
+  accessToken: null,
   authenticated: false
 })
 
@@ -12,5 +12,10 @@ export const getters = {
 export const mutations = {
   SET_TOKEN(state, accessToken) {
     state.accessToken = accessToken
+  },
+  REMOVE_TOKEN(state) {
+    state.accessToken = null
+    localStorage.removeItem('accessToken')
+    this.$router.push('/login')
   }
 }
