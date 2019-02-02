@@ -27,7 +27,6 @@ export default {
       })
         .then(response => {
           this.$store.commit('SET_USERNAME', response.data.data.name)
-          alert(response.data.name)
           this.$store.commit('SET_EMAIL', response.data.data.email)
         })
         .catch(response => {
