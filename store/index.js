@@ -14,10 +14,8 @@ export const mutations = {
   SET_TOKEN(state, accessToken) {
     state.accessToken = accessToken
   },
-  REMOVE_TOKEN(state) {
-    state.accessToken = null
-    localStorage.removeItem('accessToken')
-    this.$router.push('/login')
+  REMOVE_USER(state) {
+    Object.keys(state).forEach(prop => (state[prop] = null))
   },
   SET_USERNAME(state, userName) {
     state.userName = userName
