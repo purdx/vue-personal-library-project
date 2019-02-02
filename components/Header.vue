@@ -1,9 +1,9 @@
 <template>
   <header>
     <nav class="container-fluid navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">
+      <nuxt-link class="navbar-brand" to="/">
         Library Project
-      </a>
+      </nuxt-link>
       <ul class="navbar-nav ml-auto">
         <li
           class="nav-item dropdown"
@@ -33,6 +33,7 @@
           </div>
         </li>
       </ul>
+      </nuxt-link>
     </nav>
   </header>
 </template>
