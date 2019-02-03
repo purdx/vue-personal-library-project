@@ -17,6 +17,7 @@ export const mutations = {
     state.accessToken = accessToken
   },
   REMOVE_USER(state) {
+    localStorage.clear()
     Object.keys(state).forEach(prop => (state[prop] = null))
   },
   SET_USERNAME(state, userName) {
