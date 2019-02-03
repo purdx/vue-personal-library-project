@@ -44,6 +44,8 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@import '~assets/sass/required-bootstrap-vars';
+@import 'node_modules/bootstrap/scss/modal';
 .modal::before {
   content: '';
   position: fixed;
