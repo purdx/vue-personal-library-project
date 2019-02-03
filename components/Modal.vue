@@ -46,11 +46,14 @@ export default {
 <style lang='scss' scoped>
 @import '~assets/sass/required-bootstrap-vars';
 @import 'node_modules/bootstrap/scss/modal';
-.modal::before {
-  content: '';
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+.modal {
+  overflow-y: auto;
+  &::before {
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
 }
 </style>
