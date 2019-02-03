@@ -57,6 +57,7 @@ export default {
 
 <style lang='scss' scoped>
 .dropdown-menu {
-  left: -100%;
+  right: 0;
+  left: auto;
 }
 </style>
