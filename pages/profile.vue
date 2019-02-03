@@ -18,10 +18,18 @@
                 </li>
               </ul>
               <div class="profile-buttons">
-                <button type="button" class="btn btn-outline-secondary" @click="showInfoModal">
+                <button
+                  type="button" 
+                  class="btn btn-outline-secondary"
+                  @click="showInfoModal"
+                >
                   Edit Info
                 </button>
-                <button type="button" class="btn btn-outline-secondary">
+                <button
+                  type="button" 
+                  class="btn btn-outline-secondary"
+                  @click="showPassModal"
+                >
                   Change Password
                 </button>
               </div>
@@ -29,7 +37,10 @@
           </div>
         </div>
       </div>
-      <Modal v-if="infoModal" ref="infoModal">
+      <Modal
+        v-if="infoModal" 
+        ref="infoModal"
+      >
         <h3 slot="modal-title">
           Update your info
         </h3>
@@ -44,6 +55,7 @@
               type="text"
               class="form-control"
               placeholder="Enter name"
+              required
             >
           </div>
           <div class="form-group">
@@ -57,9 +69,67 @@
               class="form-control"
               aria-describedby="emailHelp"
               placeholder="Enter email"
+              required
             >
           </div>
-          <button type="submit" class="btn btn-primary" @click="updateInfo">
+          <button
+            type="submit"
+            class="btn btn-primary" 
+            @click="updateInfo"
+          >
+            Submit
+          </button>
+        </form>
+      </Modal>
+      <Modal
+        v-if="passModal" 
+        ref="passModal"
+      >
+        <h3 slot="modal-title">
+          Update your password
+        </h3>
+        <form slot="body" @submit.prevent>
+          <div class="form-group">
+            <label for="currentPass">
+              Current passward
+            </label>
+            <input
+              id="currentPass" 
+              v-model="currentPass"
+              type="password"
+              class="form-control"
+              placeholder="Password"
+            >
+          </div>
+          <div class="form-group">
+            <label for="newPass">
+              New password
+            </label>
+            <input
+              id="newPass"
+              v-model="newPass"
+              type="password"
+              class="form-control"
+              placeholder="Password"
+            >
+          </div>
+          <div class="form-group">
+            <label for="confirmNewPass">
+              Confirm new password
+            </label>
+            <input
+              id="confirmNewPass" 
+              v-model="newPassConfirm"
+              type="password"
+              class="form-control"
+              placeholder="Password"
+            >
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary" 
+            @click="updatePass"
+          >
             Submit
           </button>
         </form>
@@ -80,8 +150,12 @@ export default {
   data() {
     return {
       infoModal: false,
+      passModal: false,
       newName: '',
-      newEmail: ''
+      newEmail: '',
+      currentPass: '',
+      newPass: '',
+      newPassConfirm: ''
     }
   },
   methods: {
@@ -89,6 +163,12 @@ export default {
       this.infoModal = true
       setTimeout(() => {
         this.$refs.infoModal.show()
+      }, 0)
+    },
+    showPassModal() {
+      this.passModal = true
+      setTimeout(() => {
+        this.$refs.passModal.show()
       }, 0)
     },
     updateInfo() {
@@ -104,6 +184,26 @@ export default {
           this.infoModal = false
           this.$store.commit('SET_USERNAME', response.data.data.name)
           this.$store.commite('SET_EMAIL', response.data.data.name)
+        })
+        .catch(error => {
+          // eslint-disable-next-line no-console
+          console.log(error)
+        })
+    },
+    updatePass() {
+      this.$axios({
+        method: 'PATCH',
+        url: 'http://localhost:3000/api/user',
+        data: {
+          name: this.$store.state.userName,
+          email: this.$store.state.email,
+          current_password: this.currentPass,
+          password: this.newPass,
+          password_confirmation: this.newPassConfirm
+        }
+      })
+        .then(response => {
+          this.passModal = false
         })
         .catch(error => {
           // eslint-disable-next-line no-console
