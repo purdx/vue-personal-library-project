@@ -143,7 +143,7 @@ import Header from '@/components/Header'
 import Modal from '@/components/Modal'
 import successNotif from '@/utils/successNotif'
 export default {
-  name: 'TheProfile',
+  name: 'Profile',
   components: {
     Header,
     Modal
@@ -163,7 +163,7 @@ export default {
     showInfoModal() {
       this.infoModal = true
       setTimeout(() => {
-        this.$refs.infoModal.show()
+        this.$.infoModal.show()
       }, 0)
     },
     showPassModal() {
