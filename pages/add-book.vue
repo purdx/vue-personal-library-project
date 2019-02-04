@@ -21,7 +21,6 @@
                     class="form-control"
                     aria-describedby="emailHelp"
                     placeholder="Enter book title"
-                    required
                   >
                 </div>
                 <div class="form-group">
@@ -34,7 +33,6 @@
                     type="text"
                     class="form-control"
                     placeholder="Enter author name"
-                    required
                   >
                 </div>
                 <div class="form-group">
@@ -47,7 +45,6 @@
                     type="text"
                     class="form-control"
                     placeholder="Enter author name"
-                    required
                   >
                 </div>
                 <button type="submit" class="btn btn-primary" @click="submitBook">
