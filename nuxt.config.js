@@ -74,6 +74,8 @@ module.exports = {
   },
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-    API_URL: 'http://localhost:3000/api/'
+    API_URL: 'http://localhost:3000/api/',
+    USER_API: 'http://localhost:3000/api/user',
+    BOOKS_API: 'http://localhost:3000/api/books'
   }
 }
