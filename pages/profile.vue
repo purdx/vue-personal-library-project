@@ -175,7 +175,7 @@ export default {
     updateInfo() {
       this.$axios({
         method: 'PATCH',
-        url: process.env.API_URL + 'user',
+        url: process.env.USER_API,
         data: {
           name: this.newName,
           email: this.newEmail
@@ -190,7 +190,7 @@ export default {
     updatePass() {
       this.$axios({
         method: 'PATCH',
-        url: process.env.API_URL + 'user',
+        url: process.env.USER_API,
         data: {
           name: this.$store.state.userName,
           email: this.$store.state.email,
