@@ -16,7 +16,7 @@
         <div class="card-body">
           <ul class="list-group book-list">
             <li
-              v-for="book in books" 
+              v-for="(book, index) in books" 
               :key="book.id"
               class="list-group-item"
             >
@@ -30,7 +30,7 @@
                   <button class="btn btn-secondary book-list__btn">
                     Edit
                   </button>
-                  <button class="btn btn-secondary book-list__btn">
+                  <button class="btn btn-secondary book-list__btn" @click="deleteBook(book, index)">
                     Delete
                   </button>
                 </div>
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import successNotif from '@/utils/successNotif'
 export default {
   name: 'BookList',
   data() {
@@ -55,6 +56,17 @@ export default {
     this.$axios(process.env.BOOKS_API).then(response => {
       this.books = response.data.data
     })
+  },
+  methods: {
+    deleteBook(book, index) {
+      this.$axios({
+        method: 'DELETE',
+        url: process.env.BOOKS_API + `/${book.id}`
+      }).then(response => {
+        successNotif(this, 'Book deleted successfully.')
+        this.books.splice(index, 1)
+      })
+    }
   }
 }
 </script>
