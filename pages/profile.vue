@@ -141,6 +141,7 @@
 <script>
 import Header from '@/components/Header'
 import Modal from '@/components/Modal'
+import successNotif from '@/utils/successNotif'
 export default {
   name: 'TheProfile',
   components: {
@@ -179,16 +180,12 @@ export default {
           name: this.newName,
           email: this.newEmail
         }
+      }).then(response => {
+        this.infoModal = false
+        this.$store.commit('SET_USERNAME', response.data.data.name)
+        this.$store.commit('SET_EMAIL', response.data.data.email)
+        successNotif(this, 'Your information updated successfully')
       })
-        .then(response => {
-          this.infoModal = false
-          this.$store.commit('SET_USERNAME', response.data.data.name)
-          this.$store.commite('SET_EMAIL', response.data.data.name)
-        })
-        .catch(error => {
-          // eslint-disable-next-line no-console
-          console.log(error)
-        })
     },
     updatePass() {
       this.$axios({
@@ -201,14 +198,10 @@ export default {
           password: this.newPass,
           password_confirmation: this.newPassConfirm
         }
+      }).then(response => {
+        this.passModal = false
+        successNotif(this, 'Password changed successfully')
       })
-        .then(response => {
-          this.passModal = false
-        })
-        .catch(error => {
-          // eslint-disable-next-line no-console
-          console.log(error)
-        })
     }
   }
 }
