@@ -133,7 +133,7 @@ export default {
     })
   },
   methods: {
-    showDeleteBookConfirmtion(book, index) {
+    fillSelectedBook(book, index) {
       this.selectedBook = {
         title: book.title,
         author: book.author,
@@ -141,6 +141,9 @@ export default {
         id: book.id,
         index: index
       }
+    },
+    showDeleteBookConfirmtion(book, index) {
+      this.fillSelectedBook(book, index)
       this.$refs.deleteConfirmtionModal.show()
     },
     deleteBook(bookID) {
@@ -154,13 +157,7 @@ export default {
       })
     },
     editBook(book, index) {
-      this.selectedBook = {
-        title: book.title,
-        author: book.author,
-        price: book.price,
-        id: book.id,
-        index: index
-      }
+      this.fillSelectedBook(book, index)
       this.$refs.editBookModal.show()
     },
     updateBookInfo(bookID) {
