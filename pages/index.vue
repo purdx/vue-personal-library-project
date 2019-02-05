@@ -1,15 +1,19 @@
 <template>
   <div class="home-page">
     <Header />
-    <section class="container" />
+    <div class="container page-content">
+      <BookList />
+    </div>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header'
+import BookList from '@/components/BookList'
 export default {
   components: {
-    Header
+    Header,
+    BookList
   },
   beforeCreate() {
     const url = this.$route.fullPath
