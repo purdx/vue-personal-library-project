@@ -163,7 +163,7 @@ export default {
     showInfoModal() {
       this.infoModal = true
       setTimeout(() => {
-        this.$.infoModal.show()
+        this.$refs.infoModal.show()
       }, 0)
     },
     showPassModal() {
