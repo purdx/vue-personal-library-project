@@ -24,7 +24,7 @@
                 <div class="col-sm-6">
                   <div>Title: {{ book.title }}</div>
                   <div>Author: {{ book.author }}</div>
-                  <div>price: {{ book.price }}</div>
+                  <div>price: {{ currencyFormatter(book.price) }}</div>
                 </div>
                 <div class="col-sm-6 book-list__btn-wrapper d-flex">
                   <button
@@ -104,6 +104,7 @@
 
 <script>
 import successNotif from '@/utils/successNotif'
+import currencyFormatter from '@/utils/currencyFormatter'
 import Modal from '@/components/Modal'
 export default {
   name: 'BookList',
@@ -159,6 +160,9 @@ export default {
         this.$refs.editBookModal.hide()
         successNotif(this, 'Book edited successfully.')
       })
+    },
+    currencyFormatter(amount) {
+      return currencyFormatter(amount)
     }
   }
 }
