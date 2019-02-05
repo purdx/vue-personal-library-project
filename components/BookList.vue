@@ -141,7 +141,6 @@ export default {
         index: index
       }
       this.$refs.editBookModal.show()
-      // eslint-disable-next-line no-console
     },
     updateBookInfo(bookID) {
       this.$axios({
