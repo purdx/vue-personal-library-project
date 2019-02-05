@@ -35,7 +35,7 @@
                   </button>
                   <button 
                     class="btn btn-secondary book-list__btn"
-                    @click="deleteBook(book, index)"
+                    @click="showDeleteBookConfirmtion(book, index)"
                   >
                     Delete
                   </button>
@@ -99,6 +99,16 @@
         </div>
       </div>
     </Modal>
+    <Modal ref="deleteConfirmtionModal" :info="selectedBook">
+      <div slot="body">
+        <p>Are you sure that you want to delete the book?</p>
+      </div>
+      <div slot="footer">
+        <button type="submit" class="btn btn-primary" @click="deleteBook(selectedBook.id)">
+          Yes
+        </button>
+      </div>
+    </Modal>
   </section>
 </template>
 
@@ -123,13 +133,24 @@ export default {
     })
   },
   methods: {
-    deleteBook(book, index) {
+    showDeleteBookConfirmtion(book, index) {
+      this.selectedBook = {
+        title: book.title,
+        author: book.author,
+        price: book.price,
+        id: book.id,
+        index: index
+      }
+      this.$refs.deleteConfirmtionModal.show()
+    },
+    deleteBook(bookID) {
       this.$axios({
         method: 'DELETE',
-        url: process.env.BOOKS_API + `/${book.id}`
+        url: process.env.BOOKS_API + `/${bookID}`
       }).then(() => {
         successNotif(this, 'Book deleted successfully.')
-        this.books.splice(index, 1)
+        this.books.splice(this.selectedBook.index, 1)
+        this.$refs.deleteConfirmtionModal.hide()
       })
     },
     editBook(book, index) {
