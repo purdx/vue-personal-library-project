@@ -1,72 +1,37 @@
 <template>
-  <section class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        vue-book-library
-      </h1>
-      <h2 class="subtitle">
-        Book library SPA
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+  <div class="home-page">
+    <Header />
+    <div class="container page-content">
+      <BookList />
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
+import Header from '@/components/Header'
+import BookList from '@/components/BookList'
 export default {
   components: {
-    Logo
+    Header,
+    BookList
+  },
+  beforeCreate() {
+    const url = this.$route.fullPath
+    if (url.indexOf('/#access_token') !== -1) {
+      const accessToken = url.match(/#(?:access_token)=([\S\s]*?)&/)[1]
+      this.$store.commit('SET_TOKEN', accessToken)
+      this.$axios(process.env.USER_API)
+        .then(response => {
+          this.$store.commit('SET_USERNAME', response.data.data.name)
+          this.$store.commit('SET_EMAIL', response.data.data.email)
+        })
+        .catch(response => {
+          alert(response)
+        })
+    }
   }
 }
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>

@@ -24,12 +24,12 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [],
+  css: ['@/assets/sass/main.scss'],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: ['~/plugins/axios'],
 
   /*
   ** Nuxt.js modules
@@ -37,8 +37,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    // Doc: https://bootstrap-vue.js.org/docs/
-    'bootstrap-vue/nuxt',
+    '@nuxtjs/proxy',
     '@nuxtjs/pwa'
   ],
   /*
@@ -46,8 +45,11 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    proxy: true
   },
-
+  proxy: {
+    '/api': 'http://hiring.bsup.tk/'
+  },
   /*
   ** Build configuration
   */
@@ -66,5 +68,14 @@ module.exports = {
         })
       }
     }
+  },
+  router: {
+    middleware: 'authenticated'
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+    API_URL: 'http://localhost:3000/api/',
+    USER_API: 'http://localhost:3000/api/user',
+    BOOKS_API: 'http://localhost:3000/api/books'
   }
 }
