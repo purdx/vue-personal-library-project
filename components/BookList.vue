@@ -27,10 +27,16 @@
                   <div>price: {{ book.price }}</div>
                 </div>
                 <div class="col-sm-6 book-list__btn-wrapper d-flex">
-                  <button class="btn btn-secondary book-list__btn">
+                  <button
+                    class="btn btn-secondary book-list__btn"
+                    @click="editBook(book, index)"
+                  >
                     Edit
                   </button>
-                  <button class="btn btn-secondary book-list__btn" @click="deleteBook(book, index)">
+                  <button 
+                    class="btn btn-secondary book-list__btn"
+                    @click="deleteBook(book, index)"
+                  >
                     Delete
                   </button>
                 </div>
@@ -40,16 +46,74 @@
         </div>
       </div>
     </div>
+    <Modal ref="editBookModal" :info="selectedBook">
+      <div slot="body">
+        <div class="card">
+          <div class="card-header">
+            Edit the book
+          </div>
+          <div class="card-body">
+            <form @submit.prevent>
+              <div class="form-group">
+                <label for="title">
+                  Title
+                </label>
+                <input
+                  id="title"
+                  v-model="selectedBook.title"
+                  type="text"
+                  class="form-control"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter book title"
+                >
+              </div>
+              <div class="form-group">
+                <label for="author">
+                  Author
+                </label>
+                <input
+                  id="author"
+                  v-model="selectedBook.author"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter author name"
+                >
+              </div>
+              <div class="form-group">
+                <label for="price">
+                  Price
+                </label>
+                <input
+                  id="price"
+                  v-model="selectedBook.price"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter author name"
+                >
+              </div>
+              <button type="submit" class="btn btn-primary" @click="updateBookInfo(selectedBook.id)">
+                Update
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </Modal>
   </section>
 </template>
 
 <script>
 import successNotif from '@/utils/successNotif'
+import Modal from '@/components/Modal'
 export default {
   name: 'BookList',
+  components: {
+    Modal
+  },
   data() {
     return {
-      books: []
+      books: [],
+      selectedBook: {}
     }
   },
   created() {
@@ -62,9 +126,38 @@ export default {
       this.$axios({
         method: 'DELETE',
         url: process.env.BOOKS_API + `/${book.id}`
-      }).then(response => {
+      }).then(() => {
         successNotif(this, 'Book deleted successfully.')
         this.books.splice(index, 1)
+      })
+    },
+    editBook(book, index) {
+      this.selectedBook = {
+        title: book.title,
+        author: book.author,
+        price: book.price,
+        id: book.id,
+        index: index
+      }
+      this.$refs.editBookModal.show()
+      // eslint-disable-next-line no-console
+    },
+    updateBookInfo(bookID) {
+      this.$axios({
+        method: 'PATCH',
+        url: `${process.env.BOOKS_API}/${bookID}`,
+        data: {
+          title: this.selectedBook.title,
+          author: this.selectedBook.author,
+          price: this.selectedBook.price
+        }
+      }).then(response => {
+        const selectedBookIndex = this.selectedBook.index
+        this.books[selectedBookIndex].title = response.data.data.title
+        this.books[selectedBookIndex].author = response.data.data.author
+        this.books[selectedBookIndex].price = response.data.data.price
+        this.$refs.editBookModal.hide()
+        successNotif(this, 'Book edited successfully.')
       })
     }
   }

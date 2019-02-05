@@ -27,6 +27,14 @@
 <script>
 export default {
   name: 'Modal',
+  props: {
+    info: {
+      default: function() {
+        return {}
+      },
+      type: Object
+    }
+  },
   data() {
     return {
       showModal: false
