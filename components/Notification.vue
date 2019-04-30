@@ -1,7 +1,7 @@
 <template>
   <div class="notifs-container">
     <div
-      v-for="(notif, index) in $store.state.notifs"
+      v-for="(notif, index) in $store.getters.notifs"
       :key="index"
       class="alert alert-dismissible fade show"
       role="alert"
@@ -10,7 +10,7 @@
       {{ notif.message }}
       <button
         type="button"
-        class="close" 
+        class="close"
         data-dismiss="alert"
         aria-label="Close"
         @click="deleteNotif(index)"

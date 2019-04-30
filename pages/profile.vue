@@ -11,22 +11,22 @@
             <div class="card-body">
               <ul class="list-group">
                 <li class="list-group-item">
-                  Name: {{ $store.state.userName }}
+                  Name: {{ $store.getters.userName }}
                 </li>
                 <li class="list-group-item">
-                  Email: {{ $store.state.email }}
+                  Email: {{ $store.getters.email }}
                 </li>
               </ul>
               <div class="profile-buttons">
                 <button
-                  type="button" 
+                  type="button"
                   class="btn btn-outline-secondary"
                   @click="showInfoModal"
                 >
                   Edit Info
                 </button>
                 <button
-                  type="button" 
+                  type="button"
                   class="btn btn-outline-secondary"
                   @click="showPassModal"
                 >
@@ -38,7 +38,7 @@
         </div>
       </div>
       <Modal
-        v-if="infoModal" 
+        v-if="infoModal"
         ref="infoModal"
       >
         <h3 slot="modal-title">
@@ -50,7 +50,7 @@
               Name
             </label>
             <input
-              id="nameInput" 
+              id="nameInput"
               v-model="newName"
               type="text"
               class="form-control"
@@ -74,7 +74,7 @@
           </div>
           <button
             type="submit"
-            class="btn btn-primary" 
+            class="btn btn-primary"
             @click="updateInfo"
           >
             Submit
@@ -82,7 +82,7 @@
         </form>
       </Modal>
       <Modal
-        v-if="passModal" 
+        v-if="passModal"
         ref="passModal"
       >
         <h3 slot="modal-title">
@@ -94,7 +94,7 @@
               Current passward
             </label>
             <input
-              id="currentPass" 
+              id="currentPass"
               v-model="currentPass"
               type="password"
               class="form-control"
@@ -118,7 +118,7 @@
               Confirm new password
             </label>
             <input
-              id="confirmNewPass" 
+              id="confirmNewPass"
               v-model="newPassConfirm"
               type="password"
               class="form-control"
@@ -127,7 +127,7 @@
           </div>
           <button
             type="submit"
-            class="btn btn-primary" 
+            class="btn btn-primary"
             @click="updatePass"
           >
             Submit
@@ -192,8 +192,8 @@ export default {
         method: 'PATCH',
         url: process.env.USER_API,
         data: {
-          name: this.$store.state.userName,
-          email: this.$store.state.email,
+          name: this.$store.getters.userName,
+          email: this.$store.getters.email,
           current_password: this.currentPass,
           password: this.newPass,
           password_confirmation: this.newPassConfirm

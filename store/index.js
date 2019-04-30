@@ -6,9 +6,10 @@ export const state = () => ({
 })
 
 export const getters = {
-  isLoggedIn(state) {
-    return !!state.accessToken
-  }
+  isLoggedIn: state => !!state.accessToken,
+  userName: state => state.userName,
+  email: state => state.email,
+  notifs: state => state.notifs
 }
 
 export const mutations = {
