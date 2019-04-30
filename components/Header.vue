@@ -48,7 +48,6 @@ export default {
   methods: {
     logout() {
       this.$store.commit('REMOVE_USER')
-      localStorage.clear()
       this.$router.push('/login')
     }
   }
