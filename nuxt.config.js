@@ -48,7 +48,7 @@ module.exports = {
     proxy: true
   },
   proxy: {
-    '/api': 'http://hiring.bsup.tk/'
+    '/api': ''
   },
   /*
   ** Build configuration

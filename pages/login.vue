@@ -50,7 +50,7 @@ export default {
       if (this.clientID === '') {
         this.error = true
       } else {
-        location = `http://hiring.bsup.tk/oauth/authorize?client_id=${
+        location = `${process.env.baseUrl}/oauth/authorize?client_id=${
           this.clientID
         }&redirect_uri=http://localhost:3000&response_type=token&scope=`
       }
