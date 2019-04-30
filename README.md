@@ -1,4 +1,4 @@
-# vue-book-library
+# vue-personal-library
 
 > Personal library SPA
 
